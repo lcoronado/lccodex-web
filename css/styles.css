@@ -56,6 +56,7 @@ nav {
   transition: opacity 0.2s;
 }
 .nav-cta:hover { opacity: 0.85; }
+.nav-toggle { display: none; }
 
 /* ── HERO ── */
 #hero {
@@ -331,6 +332,23 @@ h2 {
 }
 .channel-text span { font-size: 0.8rem; color: var(--muted); }
 .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-hidden { position: absolute; left: -9999px; }
+.form-fields { display: flex; flex-direction: column; gap: 1rem; }
+.form-success,
+.form-error {
+  font-size: 0.9rem; border-radius: 8px; padding: 1rem 1.25rem;
+  font-family: var(--body);
+}
+.form-success {
+  color: var(--accent2);
+  background: rgba(15,217,138,0.1);
+  border: 1px solid rgba(15,217,138,0.25);
+}
+.form-error {
+  color: #ff6b6b;
+  background: rgba(255,107,107,0.1);
+  border: 1px solid rgba(255,107,107,0.25);
+}
 .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
 .form-group label {
   font-size: 0.8rem; font-weight: 500;
@@ -371,7 +389,26 @@ footer p { font-size: 0.8rem; color: var(--muted); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .nav-links { display: none; }
+  .nav-toggle {
+    display: flex; flex-direction: column; justify-content: center; gap: 6px;
+    width: 32px; height: 32px; background: transparent; border: none; cursor: pointer; padding: 0;
+  }
+  .nav-toggle span {
+    display: block; width: 100%; height: 2px; background: var(--text); border-radius: 2px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .nav-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .nav-toggle.active span:nth-child(2) { opacity: 0; }
+  .nav-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+  .nav-links {
+    display: none;
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; gap: 0;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 0.5rem 5% 1rem;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { display: block; padding: 0.75rem 0; }
   .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
   .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
 }
