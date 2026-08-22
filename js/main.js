@@ -1,28 +1,3 @@
-const contactForm = document.getElementById('contact-form');
-
-if (contactForm) {
-  contactForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const successEl = document.getElementById('form-success');
-    const errorEl = document.getElementById('form-error');
-    errorEl.hidden = true;
-
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(contactForm)).toString(),
-    })
-      .then(() => {
-        contactForm.reset();
-        document.getElementById('form-fields').hidden = true;
-        successEl.hidden = false;
-      })
-      .catch(() => {
-        errorEl.hidden = false;
-      });
-  });
-}
 
 const navToggle = document.getElementById('nav-toggle');
 const navLinks = document.getElementById('nav-links');
